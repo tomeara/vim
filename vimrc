@@ -22,7 +22,7 @@ set wildmenu
 set wildmode=list:longest,full
 
 " Remap Esc
-:imap jk <Esc>
+imap jk <Esc>
 
 " Font stuff
 if has('gui_running')
@@ -36,17 +36,17 @@ match OverLength81 /\%81v.\+/
 match OverLength120 /\%121v.\+/
 
 " Tab stuff correctly
-:set tabstop=2
-:set shiftwidth=2
-:set expandtab
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " Show whitespace
-:set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<
-:set list
+set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<
+set list
 
 " show line numbers
-:set number
-:set nowrap
+set number
+set nowrap
 
 " Move lines
 nnoremap <A-j> :m .+1<CR>==
@@ -63,7 +63,7 @@ cmap w!! w !sudo tee > /dev/null %
 " If you have .vim-swap in the current directory, it'll use that.
 " Otherwise it saves it to ~/.vim/swap, ~/tmp or .
 if isdirectory($HOME . '/.vim/swap') == 0
-  :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+  silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
 endif
 set directory=./.vim-swap//
 set directory+=~/.vim/swap//
