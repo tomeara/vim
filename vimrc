@@ -123,13 +123,18 @@ au FileType clojure call rainbow#load(
 " Fireplace
 :nmap <Leader>We :w<CR>:Eval<CR>
 
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-let g:rspec_runner = "os_x_iterm"
+" Test runner mappings
+if has('gui_running')
+  map <Leader>t :call RunCurrentSpecFile()<CR>
+  map <Leader>s :call RunNearestSpec()<CR>
+  map <Leader>l :call RunLastSpec()<CR>
+  map <Leader>a :call RunAllSpecs()<CR>
+  let g:rspec_runner = "os_x_iterm"
+else
+  let g:no_turbux_mappings = 1
+  map <leader>t <Plug>SendTestToTmux
+  map <leader>s <Plug>SendFocusedTestToTmux
+end
 
 " Vim/tmux navigator
 let g:tmux_navigator_save_on_switch = 1
