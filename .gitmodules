@@ -91,3 +91,9 @@
 [submodule "bundle/vim-endwise"]
 	path = bundle/vim-endwise
 	url = https://github.com/tpope/vim-endwise
+[submodule "bundle/tmuxline.vim"]
+	path = bundle/tmuxline.vim
+	url = git@github.com:edkolev/tmuxline.vim.git
+[submodule "bundle/vim-tmux-navigator"]
+	path = bundle/vim-tmux-navigator
+	url = git@github.com:christoomey/vim-tmux-navigator.git

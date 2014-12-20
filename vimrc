@@ -130,3 +130,6 @@ map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
 let g:rspec_runner = "os_x_iterm"
+
+" Vim/tmux navigator
+let g:tmux_navigator_save_on_switch = 1
