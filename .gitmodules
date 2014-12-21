@@ -100,6 +100,3 @@
 [submodule "bundle/vimux"]
 	path = bundle/vimux
 	url = https://github.com/benmills/vimux
-[submodule "bundle/vim-turbux"]
-	path = bundle/vim-turbux
-	url = git@github.com:jgdavey/vim-turbux.git

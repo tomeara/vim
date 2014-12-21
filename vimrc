@@ -45,8 +45,19 @@ set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<
 set list
 
 " show line numbers
-set number
+" set number
+set relativenumber
 set nowrap
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-N> :call NumberToggle()<CR>
 
 " Move lines
 nnoremap <A-j> :m .+1<CR>==
@@ -90,7 +101,7 @@ au FocusLost * :wa
 
 " NERD Tree
 let NERDTreeShowHidden=1
-map <Leader>N :NERDTreeToggle<CR>
+map <Leader>n :NERDTreeToggle<CR>
 
 " Rubocop Config
 let g:syntastic_ruby_checkers = ['rubocop']
@@ -121,19 +132,18 @@ au FileType clojure call rainbow#load(
             \ '"[-+*/=><%^&$#@!~|:?\\]"')
 
 " Fireplace
-:nmap <Leader>We :w<CR>:Eval<CR>
+nmap <Leader>We :w<CR>:Eval<CR>
 
 " Test runner mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
 if has('gui_running')
-  map <Leader>t :call RunCurrentSpecFile()<CR>
-  map <Leader>s :call RunNearestSpec()<CR>
-  map <Leader>l :call RunLastSpec()<CR>
-  map <Leader>a :call RunAllSpecs()<CR>
   let g:rspec_runner = "os_x_iterm"
 else
-  let g:no_turbux_mappings = 1
-  map <leader>t <Plug>SendTestToTmux
-  map <leader>s <Plug>SendFocusedTestToTmux
+  let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
 end
 
 " Vim/tmux navigator
