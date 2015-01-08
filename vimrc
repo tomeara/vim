@@ -45,19 +45,9 @@ set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<
 set list
 
 " show line numbers
-" set number
+set number
 set relativenumber
 set nowrap
-
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <C-N> :call NumberToggle()<CR>
 
 " Move lines
 nnoremap <A-j> :m .+1<CR>==
@@ -103,18 +93,21 @@ au FocusLost * :wa
 let NERDTreeShowHidden=1
 map <Leader>n :NERDTreeToggle<CR>
 
-" Rubocop Config
-let g:syntastic_ruby_checkers = ['rubocop']
+" NERDCommenter
+let NERDSpaceDelims = 1
 
 " CtrlP - Fuzzy file finder
 let g:ctrlp_map = '<c-p>'
 
 " Syntastic
-let g:syntastic_mode_map = { 'mode': 'active',
-    \ 'active_filetypes': [],
-    \ 'passive_filetypes': ['html'] }
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_ruby_checkers = ['rubocop']
+" let g:syntastic_coffeescript_checkers = ["coffeelint"]
 let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_warning_symbol = '❉'
+let g:syntastic_style_warning_symbol = '❉'
 
 " Airline
 let g:airline_powerline_fonts = 1
