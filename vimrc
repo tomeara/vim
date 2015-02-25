@@ -28,6 +28,7 @@ imap jk <Esc>
 if has('gui_running')
   set guifont=Sauce\ Code\ Powerline:h13
 endif
+set tenc=utf8
 
 " Column Length Highlighting
 highlight OverLength81 ctermbg=yellow ctermfg=gray guibg=#592929
@@ -100,14 +101,14 @@ let NERDSpaceDelims = 1
 let g:ctrlp_map = '<c-p>'
 
 " Syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_ruby_checkers = ['rubocop']
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_enable_signs = 1
+" let g:syntastic_ruby_checkers = ['rubocop']
 " let g:syntastic_coffeescript_checkers = ["coffeelint"]
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_warning_symbol = '❉'
-let g:syntastic_style_warning_symbol = '❉'
+" let g:syntastic_error_symbol = '✗'
+" let g:syntastic_style_error_symbol = '✗'
+" let g:syntastic_warning_symbol = '❉'
+" let g:syntastic_style_warning_symbol = '❉'
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -136,8 +137,11 @@ map <Leader>a :call RunAllSpecs()<CR>
 if has('gui_running')
   let g:rspec_runner = "os_x_iterm"
 else
-  let g:rspec_command = 'call VimuxRunCommand("clear; rspec {spec}")'
+  let g:rspec_command = 'call VimuxRunCommand("clear; bundle exec rspec {spec}")'
 end
 
 " Vim/tmux navigator
 let g:tmux_navigator_save_on_switch = 1
+
+" AutoPairs
+" let g:AutoPairsFlyMode = 1
