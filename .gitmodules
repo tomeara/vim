@@ -115,3 +115,6 @@
 [submodule "/Users/tedomeara/.vim/bundle/rainbow"]
 	path = /Users/tedomeara/.vim/bundle/rainbow
 	url = git@github.com:oblitum/rainbow.git
+[submodule "bundle/ack-vim"]
+	path = bundle/ack-vim
+	url = https://github.com/mileszs/ack.vim.git
