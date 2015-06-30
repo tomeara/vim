@@ -18,6 +18,17 @@ let mapleader=" "
 set scrolloff=6
 set cursorline
 
+" Change cursor when in insert mode
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" highlight CursorLineNR cterm=NONE ctermbg=236
+
 " Autocomplete command mode
 set wildmenu
 set wildmode=list:longest,full
@@ -27,6 +38,18 @@ set autoread
 
 " Remap Esc
 imap jk <Esc>
+vmap <BS><BS> <Esc>
+
+" Shortcut :w
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>wqa :wqa<CR>
+
+" Shortcut ESC
+nnoremap <Leader>wqa :wqa<CR>
+
+" Shortcut to visual line mode
+nmap <Leader><Leader> V
 
 " Font stuff
 if has('gui_running')
@@ -108,13 +131,21 @@ autocmd VimResized * :wincmd =
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Toggle paste mode on and off
-map <leader>v :setlocal paste!<cr>
+vmap <Leader>y "+y
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
 "==================================
 "
 "  PACKAGE CONFIGS
 "
 "==================================
+
+" vim-expand-region 
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " NERD Tree
 let NERDTreeShowHidden=1
@@ -124,7 +155,7 @@ map <Leader>n :NERDTreeToggle<CR>
 let NERDSpaceDelims = 1
 
 " CtrlP - Fuzzy file finder
-let g:ctrlp_map = '<c-p>'
+nnoremap <Leader>o :CtrlP<CR>
 
 " Syntastic
 " let g:syntastic_check_on_open = 0
@@ -176,11 +207,21 @@ map <Leader>a :call RunAllSpecs()<CR>
 if has('gui_running')
   let g:rspec_runner = "os_x_iterm"
 else
-  let g:rspec_command = 'call VimuxRunCommand("clear; bundle exec rspec {spec}")'
+  let g:rspec_command = 'call VimuxRunCommand("clear; RAILS_ENV=test bundle exec rspec {spec}")'
 end
 
 " Vim/tmux navigator
 let g:tmux_navigator_save_on_switch = 1
+
+" Tmuxline
+let g:tmuxline_powerline_separators = 1
+let g:tmuxline_preset = {
+        \ 'c': '#(rainbarf --remaining --bg=black --width=20)',
+        \ 'win': ['#I', '#W'],
+        \ 'cwin': ['#I', '#W'],
+        \ 'x': '',
+        \ 'y': ['%a %b %d', '%R'],
+        \ 'z': '#h'}
 
 " AutoPairs
 " let g:AutoPairsFlyMode = 1
