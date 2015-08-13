@@ -108,7 +108,8 @@ nmap <Leader><Leader> V
 
 " Font stuff
 if has('gui_running')
-  set guifont=Sauce\ Code\ Powerline:h13
+" set guifont=Sauce\ Code\ Powerline:h13
+  set guifont=Office\ Code\ Pro:h13
 endif
 set tenc=utf8
 
@@ -198,7 +199,10 @@ vmap <Leader>P "+P
 "
 "==================================
 
-" vim-expand-region 
+" Easymotion
+map <Leader>j <Plug>(easymotion-prefix)
+
+" vim-expand-region
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
@@ -242,6 +246,8 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 
 " Gundo
 nnoremap gh :GundoToggle<CR>
+set undofile
+set undodir=~/.nvim/undo
 
 " Rainbow Parentheses
 " au FileType c,cpp,objc,objcpp,go,rust,javascript,java call rainbow#load()
