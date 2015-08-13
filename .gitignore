@@ -1,4 +1,5 @@
 .netrwhist
 swap
 undo
+bundle/*
 .DS_Store
