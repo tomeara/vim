@@ -43,9 +43,6 @@
 [submodule "bundle/vim-clojure-static"]
 	path = bundle/vim-clojure-static
 	url = https://github.com/guns/vim-clojure-static
-[submodule "bundle/gundo"]
-	path = bundle/gundo
-	url = https://github.com/sjl/gundo.vim
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
@@ -121,3 +118,9 @@
 [submodule "bundle/vim-expand-region"]
 	path = bundle/vim-expand-region
 	url = https://github.com/terryma/vim-expand-region
+[submodule "bundle/mundo"]
+	path = bundle/mundo
+	url = git@github.com:simnalamburt/vim-mundo.git
+[submodule "vim-repeat"]
+	path = vim-repeat
+	url = git@github.com:tpope/vim-repeat.git
