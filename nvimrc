@@ -1,15 +1,66 @@
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
-colors Tomorrow-Night-Eighties
-autocmd vimenter * NERDTree
+set nocompatible
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.nvim/bundle/Vundle.vim
+call vundle#begin('~/.nvim/bundle')
 
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'simnalamburt/vim-mundo'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tyru/open-browser.vim'
+Plugin 'vim-scripts/paredit.vim'
+Plugin 'oblitum/rainbow'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+Plugin 'tomtom/tlib_vim'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'bling/vim-airline'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'tpope/vim-classpath'
+Plugin 'guns/vim-clojure-static'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-dispatch'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-endwise'
+Plugin 'terryma/vim-expand-region'
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-haml'
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-leiningen'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-repeat'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-sensible'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-surround'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'benmills/vimux'
+
+call vundle#end()
+filetype plugin indent on
 
 "======================================
 "
 "  GENERAL CONFIGS
 "
 "======================================
+
+syntax on
+colors Tomorrow-Night-Eighties
+autocmd vimenter * NERDTree
 
 " Redraw quicker
 set lazyredraw
