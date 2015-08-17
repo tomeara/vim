@@ -4,50 +4,57 @@ filetype off
 set rtp+=~/.nvim/bundle/Vundle.vim
 call vundle#begin('~/.nvim/bundle')
 
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'benmills/vimux'
+Plugin 'bling/vim-airline'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'mileszs/ack.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'gregsexton/gitv'
+Plugin 'guns/vim-clojure-static'
+Plugin 'honza/vim-snippets'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'simnalamburt/vim-mundo'
+Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'oblitum/rainbow'
+Plugin 'pangloss/vim-javascript'
+Plugin 'rizzatti/dash.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tyru/open-browser.vim'
-Plugin 'vim-scripts/paredit.vim'
-Plugin 'oblitum/rainbow'
-Plugin 'ervandew/supertab'
 Plugin 'scrooloose/syntastic'
-Plugin 'tomtom/tlib_vim'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'bling/vim-airline'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'tpope/vim-classpath'
-Plugin 'guns/vim-clojure-static'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'tpope/vim-dispatch'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-endwise'
+Plugin 'simnalamburt/vim-mundo'
 Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-classpath'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-haml'
-Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-leiningen'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-sensible'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-surround'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
+Plugin 'tyru/open-browser.vim'
+Plugin 'vim-ruby/vim-ruby'
+" Plugin 'vim-scripts/paredit.vim'
+Plugin 'kshenoy/vim-signature'
+Plugin 'vim-scripts/YankRing.vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 call vundle#end()
 filetype plugin indent on
@@ -59,15 +66,64 @@ filetype plugin indent on
 "======================================
 
 syntax on
-colors Tomorrow-Night-Eighties
 autocmd vimenter * NERDTree
-
-" Redraw quicker
-set lazyredraw
-set ttyfast
 
 " Remap <Leader> to spacebar
 let mapleader=" "
+
+
+"-------------------------------------
+" Display
+"-------------------------------------
+" Font stuff
+if has('gui_running')
+" set guifont=Sauce\ Code\ Powerline:h13
+  set guifont=Office\ Code\ Pro:h13
+endif
+set tenc=utf8
+
+colors Tomorrow-Night-Eighties
+
+" Show whitespace
+set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<
+set list
+
+" show line numbers
+set number
+set relativenumber
+set nowrap
+
+" Keep buffers, instead of closing them
+set hidden
+
+" Save on window blur
+au FocusLost * :wa
+
+" Automatically resize panes when the terminal is resized
+autocmd VimResized * :wincmd =
+
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
+" Long column highlighting
+set nowrap
+
+" Set columns at 80 and 120 chars
+if exists('+colorcolumn')
+  set colorcolumn=80,120
+  " hi ColorColumn ctermbg=236
+endif
+
+
+"-------------------------------------
+" Cursor
+"-------------------------------------
+" Redraw quicker
+set lazyredraw
+set ttyfast
 
 " More context around cursor when scrolling
 set scrolloff=6
@@ -84,41 +140,29 @@ set cursorline
 
 " highlight CursorLineNR cterm=NONE ctermbg=236
 
-" Autocomplete command mode
-set wildmenu
-set wildmode=list:longest,full
 
-" Set to auto read when a file is changed from the outside
-set autoread
+"-------------------------------------
+" Yank/Paste/Registers
+"-------------------------------------
+" Move lines
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
-" Remap Esc
-imap jk <Esc>
-vmap <BS><BS> <Esc>
+" Delete character should not squash paste buffer
+nnoremap <silent> x "_x
+vnoremap <silent> x "_x
 
-" Shortcut :w
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>wq :wq<CR>
-nnoremap <Leader>wqa :wqa<CR>
+" Toggle paste mode on and off
+vmap <Leader>y "+y
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
-" Shortcut ESC
-nnoremap <Leader>wqa :wqa<CR>
 
-" Shortcut to visual line mode
-nmap <Leader><Leader> V
-
-" Font stuff
-if has('gui_running')
-" set guifont=Sauce\ Code\ Powerline:h13
-  set guifont=Office\ Code\ Pro:h13
-endif
-set tenc=utf8
-
-" Column Length Highlighting
-highlight OverLength81 ctermbg=yellow ctermfg=gray guibg=#592929
-highlight OverLength120 ctermbg=red ctermfg=white guibg=#592929
-match OverLength81 /\%81v.\+/
-match OverLength120 /\%121v.\+/
-
+"-------------------------------------
+" Searching
+"-------------------------------------
 " Search stuff
 set incsearch
 set hlsearch
@@ -136,23 +180,20 @@ nnoremap :g// :g//
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 
-" Tab stuff correctly
-set tabstop=2
-set shiftwidth=2
-set expandtab
 
-" Show whitespace
-set listchars=eol:¬,tab:>-,trail:~,extends:>,precedes:<
-set list
+"-------------------------------------
+" Command
+"-------------------------------------
+" command line
+nnoremap ; :
+vnoremap ; :
 
-" show line numbers
-set number
-set relativenumber
-set nowrap
+" Autocomplete command mode
+set wildmenu
+set wildmode=list:longest,full
 
-" Move lines
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+" Set to auto read when a file is changed from the outside
+set autoread
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
@@ -168,36 +209,82 @@ set directory+=~/.vim/swap//
 set directory+=~/tmp//
 set directory+=.
 
-" Keep buffers, instead of closing them
-set hidden
-
-"folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
-
-" Save on window blur
-au FocusLost * :wa
-
-" Automatically resize panes when the terminal is resized
-autocmd VimResized * :wincmd =
-
 " Automatically source vimrc on save.
 " autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
-" Toggle paste mode on and off
-vmap <Leader>y "+y
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+
+"-------------------------------------
+" Insert Mode
+"-------------------------------------
+" Remap Esc
+imap jk <Esc>
+
+" Delete character should not squash paste buffer
+vnoremap <silent> x "_x
+
+" Tab stuff correctly
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+
+"-------------------------------------
+" Visual Mode
+"-------------------------------------
+" Remap Esc
+vmap <BS><BS> <Esc>
+
+" Shortcut to visual line mode
+nmap <Leader><Leader> V
+
+" Delete character should not squash paste buffer
+vnoremap <silent> x "_x
+
 
 "==================================
 "
 "  PACKAGE CONFIGS
 "
 "==================================
+" NERDTree Git
+if !exists('g:NERDTreeIndicatorMap')
+    let g:NERDTreeIndicatorMap = {
+                \ "Modified"  : "❉",
+                \ "Staged"    : "✚",
+                \ "Untracked" : "✭",
+                \ "Renamed"   : "➜",
+                \ "Unmerged"  : "═",
+                \ "Deleted"   : "✖",
+                \ "Dirty"     : "•",
+                \ "Clean"     : "✔︎",
+                \ "Unknown"   : "?"
+                \ }
+endif
+
+" YankRing
+map yr :YRShow<CR>
+
+" Indent Guide
+autocmd vimenter * IndentGuidesEnable
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size  = 1
+highlight IndentGuidesOdd ctermbg=236
+highlight IndentGuidesEven ctermbg=236
+
+" Multi Cursor
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" EasyAlign
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" UltiSnips / YouCompleteMe
+let g:UltiSnipsExpandTrigger = '<c-j>'
+" let g:ycm_key_list_select_completion=['<c-j>']
 
 " Easymotion
 map <Leader>j <Plug>(easymotion-prefix)
@@ -260,10 +347,20 @@ au FileType clojure call rainbow#load()
 nmap <Leader>We :w<CR>:Eval<CR>
 
 " Test runner mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+au FileType ruby map <Leader>t :call RunCurrentSpecFile()<CR>
+au FileType ruby map <Leader>s :call RunNearestSpec()<CR>
+au FileType ruby map <Leader>l :call RunLastSpec()<CR>
+au FileType ruby map <Leader>a :call RunAllSpecs()<CR>
+
+au FileType coffee map <Leader>t :call RunSingleEmberTestModule<CR>
+au FileType coffee map <Leader>s :call RunSingleEmberTest<CR>
+au FileType coffee map <Leader>l :call RunLastEmberTest<CR>
+au FileType coffee map <Leader>a :call RunAllEmberTests<CR>
+
+au FileType javascript map <Leader>t :call RunSingleEmberTestModule<CR>
+au FileType javascript map <Leader>s :call RunSingleEmberTest<CR>
+au FileType javascript map <Leader>l :call RunLastEmberTest<CR>
+au FileType javascript map <Leader>a :call RunAllEmberTests<CR>
 
 if has('gui_running')
   let g:rspec_runner = "os_x_iterm"
