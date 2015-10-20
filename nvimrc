@@ -129,6 +129,11 @@ set ttyfast
 set scrolloff=6
 set cursorline
 
+" Remap J to \ for joining lines, move up and down quicker
+nnoremap \ J
+nnoremap J 4j
+nnoremap K 4k
+
 " Change cursor when in insert mode
 " if exists('$TMUX')
 "   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
