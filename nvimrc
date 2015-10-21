@@ -27,7 +27,6 @@ Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'oblitum/rainbow'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rizzatti/dash.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -55,6 +54,10 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'kshenoy/vim-signature'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'guns/vim-sexp'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'tpope/vim-salve'
 
 call vundle#end()
 filetype plugin indent on
@@ -342,11 +345,25 @@ set undofile
 set undodir=~/.nvim/undo
 
 " Rainbow Parentheses
-" au FileType c,cpp,objc,objcpp,go,rust,javascript,java call rainbow#load()
-au FileType clojure call rainbow#load()
-" au FileType clojure call rainbow#load(
-"             \ [['(', ')'], ['\[', '\]'], ['{', '}']],
-"            \ '"[-+*/=><%^&$#@!~|:?\\]"')
+let g:rbpt_colorpairs = [
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax clojure RainbowParenthesesLoadRound
+au Syntax clojure RainbowParenthesesLoadSquare
+au Syntax clojure RainbowParenthesesLoadBraces
 
 " Fireplace
 nmap <Leader>We :w<CR>:Eval<CR>
