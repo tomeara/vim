@@ -4,10 +4,12 @@ filetype off
 set rtp+=~/.nvim/bundle/Vundle.vim
 call vundle#begin('~/.nvim/bundle')
 
+" Plugin 'vim-scripts/paredit.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
@@ -18,11 +20,14 @@ Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'gregsexton/gitv'
 Plugin 'guns/vim-clojure-static'
+Plugin 'guns/vim-sexp'
 Plugin 'honza/vim-snippets'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'kshenoy/vim-signature'
 Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -46,18 +51,13 @@ Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-leiningen'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-salve'
 Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'tpope/vim-surround'
 Plugin 'tyru/open-browser.vim'
 Plugin 'vim-ruby/vim-ruby'
-" Plugin 'vim-scripts/paredit.vim'
-Plugin 'kshenoy/vim-signature'
-Plugin 'vim-scripts/YankRing.vim'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'guns/vim-sexp'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'tpope/vim-salve'
+" Plugin 'vim-scripts/YankRing.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -133,9 +133,9 @@ set scrolloff=6
 set cursorline
 
 " Remap J to \ for joining lines, move up and down quicker
-nnoremap \ J
-nnoremap J 4j
-nnoremap K 4k
+" nnoremap \ J
+" nnoremap J 4j
+" nnoremap K 4k
 
 " Change cursor when in insert mode
 " if exists('$TMUX')
@@ -270,7 +270,7 @@ if !exists('g:NERDTreeIndicatorMap')
 endif
 
 " YankRing
-map yr :YRShow<CR>
+" map yr :YRShow<CR>
 
 " Indent Guide
 autocmd vimenter * IndentGuidesEnable
