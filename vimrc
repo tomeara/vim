@@ -1,8 +1,8 @@
 set nocompatible
 filetype off
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.nvim/bundle/Vundle.vim
-call vundle#begin('~/.nvim/bundle')
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('~/.vim/bundle')
 
 " Plugin 'vim-scripts/paredit.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
