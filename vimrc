@@ -6,6 +6,7 @@ call vundle#begin('~/.vim/bundle')
 
 " Plugin 'vim-scripts/paredit.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'Numkil/ag.nvim'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
@@ -13,6 +14,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edkolev/tmuxline.vim'
@@ -28,16 +30,21 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'kshenoy/vim-signature'
-Plugin 'mileszs/ack.vim'
+Plugin 'lambdatoast/elm.vim'
+" Plugin 'mileszs/ack.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'pangloss/vim-javascript'
+Plugin 'othree/yajs.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/es.next.syntax.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'simnalamburt/vim-mundo'
+Plugin 'ternjs/tern_for_vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'thoughtbot/vim-rspec'
@@ -55,9 +62,7 @@ Plugin 'tpope/vim-salve'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'tpope/vim-surround'
-Plugin 'tyru/open-browser.vim'
 Plugin 'vim-ruby/vim-ruby'
-" Plugin 'vim-scripts/YankRing.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -93,7 +98,7 @@ set list
 
 " show line numbers
 set number
-set relativenumber
+" set relativenumber
 set nowrap
 
 " Keep buffers, instead of closing them
@@ -129,8 +134,10 @@ set lazyredraw
 set ttyfast
 
 " More context around cursor when scrolling
-set scrolloff=6
+set scrolloff=999 " Hack to set cursor in the middle of the screen
 set cursorline
+" nnoremap j jzz
+" nnoremap k kzz
 
 " Remap J to \ for joining lines, move up and down quicker
 " nnoremap \ J
@@ -157,8 +164,8 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " Delete character should not squash paste buffer
-nnoremap <silent> x "_x
-vnoremap <silent> x "_x
+nnoremap <silent> x "xx
+vnoremap <silent> x "xx
 
 " Toggle paste mode on and off
 vmap <Leader>y "+y
@@ -177,22 +184,19 @@ set hlsearch
 set smartcase
 nmap <Leader>/ :nohl<cr>
 
-" Use 'very magic' search by default
-nnoremap / /\v
-vnoremap / /\v
-cnoremap %s/ %smagic/
-cnoremap \>s/ \>smagic/
-nnoremap :g/ :g/\v
-nnoremap :g// :g//
-
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 
+" Ignore .git et al from results
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/tmp/*
 
 "-------------------------------------
 " Command
 "-------------------------------------
-" command line
+" Remap the default leader to next character, since I use <Space> for leader
+nnoremap \ ;
+nnoremap \ ;
+" Remap command to not have to use <Shift>
 nnoremap ; :
 vnoremap ; :
 
@@ -206,29 +210,23 @@ set autoread
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
+set noswapfile " swapfiles don't really do anything for me
 " Save your swp files to a less annoying place than the current directory.
 " If you have .vim-swap in the current directory, it'll use that.
 " Otherwise it saves it to ~/.vim/swap, ~/tmp or .
-if isdirectory($HOME . '/.vim/swap') == 0
-  silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
-endif
-set directory=./.vim-swap//
-set directory+=~/.vim/swap//
-set directory+=~/tmp//
-set directory+=.
-
-" Automatically source vimrc on save.
-" autocmd! bufwritepost $MYVIMRC source $MYVIMRC
-
+" if isdirectory($HOME . '/.vim/swap') == 0
+"   silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+" endif
+" set directory=./.vim-swap//
+" set directory+=~/.vim/swap//
+" set directory+=~/tmp//
+" set directory+=.
 
 "-------------------------------------
 " Insert Mode
 "-------------------------------------
 " Remap Esc
 imap jk <Esc>
-
-" Delete character should not squash paste buffer
-vnoremap <silent> x "_x
 
 " Tab stuff correctly
 set tabstop=2
@@ -240,13 +238,13 @@ set expandtab
 " Visual Mode
 "-------------------------------------
 " Remap Esc
-vmap <BS><BS> <Esc>
+vmap <Leader><Leader> <Esc>
 
 " Shortcut to visual line mode
 nmap <Leader><Leader> V
 
 " Delete character should not squash paste buffer
-vnoremap <silent> x "_x
+vnoremap <silent> x "xx
 
 
 "==================================
@@ -269,8 +267,8 @@ if !exists('g:NERDTreeIndicatorMap')
                 \ }
 endif
 
-" YankRing
-" map yr :YRShow<CR>
+" Fixes problem with GitGutter: ihttps://github.com/airblade/vim-gitgutter/issues/106
+let g:gitgutter_realtime = 0
 
 " Indent Guide
 autocmd vimenter * IndentGuidesEnable
@@ -290,12 +288,11 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Easymotion
+nmap <Enter> <Plug>(easymotion-prefix)
+
 " UltiSnips / YouCompleteMe
 let g:UltiSnipsExpandTrigger = '<c-j>'
-" let g:ycm_key_list_select_completion=['<c-j>']
-
-" Easymotion
-map <Leader>j <Plug>(easymotion-prefix)
 
 " vim-expand-region
 vmap v <Plug>(expand_region_expand)
@@ -312,16 +309,18 @@ let NERDSpaceDelims = 1
 nnoremap <Leader>o :CtrlP<CR>
 
 " Syntastic
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_enable_signs = 1
-" let g:syntastic_ruby_checkers = ['rubocop']
-" let g:syntastic_coffeescript_checkers = ["coffeelint"]
-" let g:syntastic_error_symbol = '✗'
-" let g:syntastic_style_error_symbol = '✗'
-" let g:syntastic_warning_symbol = '❉'
-" let g:syntastic_style_warning_symbol = '❉'
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_coffeescript_checkers = ["coffeelint"]
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✗'
+let g:syntastic_warning_symbol = '❉'
+let g:syntastic_style_warning_symbol = '❉'
 
 " Airline
+let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -366,23 +365,24 @@ au Syntax clojure RainbowParenthesesLoadSquare
 au Syntax clojure RainbowParenthesesLoadBraces
 
 " Fireplace
-nmap <Leader>We :w<CR>:Eval<CR>
+au FileType clojure nmap <Leader>t :w<CR>:Require<CR>:Eval<CR>
+au FileType clojure nmap <Leader>s :w<CR>:Eval<CR>
 
 " Test runner mappings
-au FileType ruby map <Leader>t :call RunCurrentSpecFile()<CR>
-au FileType ruby map <Leader>s :call RunNearestSpec()<CR>
-au FileType ruby map <Leader>l :call RunLastSpec()<CR>
-au FileType ruby map <Leader>a :call RunAllSpecs()<CR>
+au FileType ruby map <Leader>t :w<CR> :call RunCurrentSpecFile()<CR>
+au FileType ruby map <Leader>s :w<CR> :call RunNearestSpec()<CR>
+au FileType ruby map <Leader>l :w<CR> :call RunLastSpec()<CR>
+au FileType ruby map <Leader>a :w<CR> :call RunAllSpecs()<CR>
 
-au FileType coffee map <Leader>t :call RunSingleEmberTestModule<CR>
-au FileType coffee map <Leader>s :call RunSingleEmberTest<CR>
-au FileType coffee map <Leader>l :call RunLastEmberTest<CR>
-au FileType coffee map <Leader>a :call RunAllEmberTests<CR>
+au FileType coffee map <Leader>t :w<CR> :call RunSingleEmberTestModule<CR>
+au FileType coffee map <Leader>s :w<CR> :call RunSingleEmberTest<CR>
+au FileType coffee map <Leader>l :w<CR> :call RunLastEmberTest<CR>
+au FileType coffee map <Leader>a :w<CR> :call RunAllEmberTests<CR>
 
-au FileType javascript map <Leader>t :call RunSingleEmberTestModule<CR>
-au FileType javascript map <Leader>s :call RunSingleEmberTest<CR>
-au FileType javascript map <Leader>l :call RunLastEmberTest<CR>
-au FileType javascript map <Leader>a :call RunAllEmberTests<CR>
+au FileType javascript map <Leader>t :w<CR> :call RunSingleEmberTestModule<CR>
+au FileType javascript map <Leader>s :w<CR> :call RunSingleEmberTest<CR>
+au FileType javascript map <Leader>l :w<CR> :call RunLastEmberTest<CR>
+au FileType javascript map <Leader>a :w<CR> :call RunAllEmberTests<CR>
 
 if has('gui_running')
   let g:rspec_runner = "os_x_iterm"
