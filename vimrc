@@ -1,70 +1,66 @@
 set nocompatible
 filetype off
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin('~/.vim/bundle')
+" make sure to add vim-plug to the autoload dir
+call plug#begin('~/.vim/bundle')
 
-" Plugin 'vim-scripts/paredit.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'Numkil/ag.nvim'
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'benmills/vimux'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'ekalinin/Dockerfile.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'gregsexton/gitv'
-Plugin 'guns/vim-clojure-static'
-Plugin 'guns/vim-sexp'
-Plugin 'honza/vim-snippets'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'kien/ctrlp.vim'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'kshenoy/vim-signature'
-Plugin 'lambdatoast/elm.vim'
-" Plugin 'mileszs/ack.vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/yajs.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'othree/es.next.syntax.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'simnalamburt/vim-mundo'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'terryma/vim-expand-region'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-leiningen'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-salve'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'Numkil/ag.nvim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'benmills/vimux'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'cloudhead/neovim-fuzzy'
+Plug 'easymotion/vim-easymotion'
+Plug 'edkolev/tmuxline.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-sexp'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'kchmck/vim-coffee-script'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'lambdatoast/elm.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/es.next.syntax.vim'
+Plug 'rizzatti/dash.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'neomake/neomake'
+Plug 'simnalamburt/vim-mundo'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'ternjs/tern_for_vim'
+Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-leiningen'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby'
+Plug 'elixir-lang/vim-elixir'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 "======================================
@@ -86,7 +82,8 @@ let mapleader=" "
 " Font stuff
 if has('gui_running')
 " set guifont=Sauce\ Code\ Powerline:h13
-  set guifont=Office\ Code\ Pro:h13
+  " set guifont=Office\ Code\ Pro:h13
+  set guifont=Fira\ Code:h13
 endif
 set tenc=utf8
 
@@ -136,24 +133,6 @@ set ttyfast
 " More context around cursor when scrolling
 set scrolloff=999 " Hack to set cursor in the middle of the screen
 set cursorline
-" nnoremap j jzz
-" nnoremap k kzz
-
-" Remap J to \ for joining lines, move up and down quicker
-" nnoremap \ J
-" nnoremap J 4j
-" nnoremap K 4k
-
-" Change cursor when in insert mode
-" if exists('$TMUX')
-"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" else
-"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" endif
-
-" highlight CursorLineNR cterm=NONE ctermbg=236
 
 
 "-------------------------------------
@@ -211,16 +190,6 @@ set autoread
 cmap w!! w !sudo tee > /dev/null %
 
 set noswapfile " swapfiles don't really do anything for me
-" Save your swp files to a less annoying place than the current directory.
-" If you have .vim-swap in the current directory, it'll use that.
-" Otherwise it saves it to ~/.vim/swap, ~/tmp or .
-" if isdirectory($HOME . '/.vim/swap') == 0
-"   silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
-" endif
-" set directory=./.vim-swap//
-" set directory+=~/.vim/swap//
-" set directory+=~/tmp//
-" set directory+=.
 
 "-------------------------------------
 " Insert Mode
@@ -291,8 +260,14 @@ nmap ga <Plug>(EasyAlign)
 " Easymotion
 nmap <Enter> <Plug>(easymotion-prefix)
 
-" UltiSnips / YouCompleteMe
-let g:UltiSnipsExpandTrigger = '<c-j>'
+" Neosnippet / Deoplete
+imap <C-j> <Plug>(neosnippet_expand_or_jump)
+smap <C-j> <Plug>(neosnippet_expand_or_jump)
+xmap <C-j> <Plug>(neosnippet_expand_target)
+
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+let g:deoplete#enable_at_startup = 1
 
 " vim-expand-region
 vmap v <Plug>(expand_region_expand)
@@ -305,19 +280,20 @@ map <Leader>n :NERDTreeToggle<CR>
 " NERDCommenter
 let NERDSpaceDelims = 1
 
-" CtrlP - Fuzzy file finder
-nnoremap <Leader>o :CtrlP<CR>
+" NeoFuzzy - Fuzzy file finder
+nnoremap <Leader>o :FuzzyOpen<CR>
 
-" Syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_coffeescript_checkers = ["coffeelint"]
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_warning_symbol = '❉'
-let g:syntastic_style_warning_symbol = '❉'
+" Neomake
+autocmd! BufWritePost * Neomake
+
+let g:neomake_warning_sign = {
+  \ 'text': '❉',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': '✗',
+  \ 'texthl': 'ErrorMsg',
+  \ }
 
 " Airline
 let g:airline_theme='tomorrow'
@@ -339,7 +315,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 :nmap <silent> <leader>d <Plug>DashSearch
 
 " Gundo
-nnoremap gh :GundoToggle<CR>
+nnoremap gh :MundoToggle<CR>
 set undofile
 set undodir=~/.nvim/undo
 
@@ -374,16 +350,6 @@ au FileType ruby map <Leader>s :w<CR> :call RunNearestSpec()<CR>
 au FileType ruby map <Leader>l :w<CR> :call RunLastSpec()<CR>
 au FileType ruby map <Leader>a :w<CR> :call RunAllSpecs()<CR>
 
-au FileType coffee map <Leader>t :w<CR> :call RunSingleEmberTestModule<CR>
-au FileType coffee map <Leader>s :w<CR> :call RunSingleEmberTest<CR>
-au FileType coffee map <Leader>l :w<CR> :call RunLastEmberTest<CR>
-au FileType coffee map <Leader>a :w<CR> :call RunAllEmberTests<CR>
-
-au FileType javascript map <Leader>t :w<CR> :call RunSingleEmberTestModule<CR>
-au FileType javascript map <Leader>s :w<CR> :call RunSingleEmberTest<CR>
-au FileType javascript map <Leader>l :w<CR> :call RunLastEmberTest<CR>
-au FileType javascript map <Leader>a :w<CR> :call RunAllEmberTests<CR>
-
 if has('gui_running')
   let g:rspec_runner = "os_x_iterm"
 else
@@ -395,16 +361,14 @@ let g:tmux_navigator_save_on_switch = 1
 
 " Tmuxline
 let g:tmuxline_powerline_separators = 1
+
 let g:tmuxline_preset = {
-        \ 'c': '#(rainbarf --remaining --bg=black --width=20)',
         \ 'win': ['#I', '#W'],
         \ 'cwin': ['#I', '#W'],
         \ 'x': '',
         \ 'y': ['%a %b %d', '%R'],
         \ 'z': '#h'}
 
-" AutoPairs
-" let g:AutoPairsFlyMode = 1
 
 "==================================
 "
